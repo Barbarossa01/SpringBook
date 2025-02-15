@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Book</title>
+    
+            <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+    
+</head>
+<body>
+
+<div>
+    <h2>New Book</h2>
+    <br />
+    <form th:action="@{/save_book}" th:object="${book}" method="post">
+        <table>
+            <tr>
+                <td>Title</td>
+                <td><input type="text" th:field="*{title}" /></td>
+            </tr>
+
+            <!-- Publisher Selection -->
+            <tr>
+                <td>Publisher</td>
+                <td>
+                    <select th:field="*{publisher}">
+                        <option th:each="pub : ${publishers}" th:value="${pub.idp}" th:text="${pub.name}" />
+                    </select>
+                </td>
+            </tr>
+
+            <!-- Category Selection -->
+            <tr>
+                <td>Category</td>
+                <td>
+                    <select th:field="*{category}">
+                        <option th:each="cat : ${categories}" th:value="${cat.idc}" th:text="${cat.description}" />
+                    </select>
+                </td>
+            </tr>
+
+        </table>
+        <button type="submit">Save</button>
+    </form>
+</div>
+
+</body>
+</html>

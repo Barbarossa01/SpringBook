@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Book</title>
+    
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+</head>
+<body>
+
+<div>
+    <h2>Edit Book</h2>
+    <br />
+<form th:action="@{/update_book/{idb}(idb=${book.idb})}" th:object="${book}" method="post">
+    <p>Book ID: <span th:text="${book.idb}"></span></p>
+    <input type="hidden" th:field="*{idb}" />
+    
+        <table>
+            <tr>
+                <td>Title</td>
+                <td><input type="text" th:field="*{title}" /></td>
+            </tr>
+
+            <!-- Publisher Selection -->
+            <tr>
+                <td>Publisher</td>
+                <td>
+                    <select th:field="*{publisher}">
+                        <option th:each="pub : ${publishers}" 
+                                th:value="${pub.idp}" 
+                                th:text="${pub.name}" 
+                                th:selected="${book.publisher?.idp == pub.idp}">
+                            <!-- Display the name of each publisher in the dropdown -->
+                        </option>
+                    </select>
+                </td>
+            </tr>
+
+            <!-- Category Selection -->
+            <tr>
+                <td>Category</td>
+                <td>
+                    <select th:field="*{category}">
+                        <option th:each="cat : ${categories}" 
+                                th:value="${cat.idc}" 
+                                th:text="${cat.description}" 
+                                th:selected="${book.category?.idc == cat.idc}">
+                            <!-- Display the description of each category in the dropdown -->
+                        </option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <button type="submit">Update</button>
+    </form>
+</div>
+
+</body>
+</html>

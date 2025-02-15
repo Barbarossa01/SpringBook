@@ -1,0 +1,15 @@
+<!-- src/main/resources/templates/menu.html -->
+<div>
+
+    <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a>
+
+      <form sec:authorize="isAuthenticated()" action="/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
+
+    <ul>
+        <li><a href="/book_list">Book List</a></li>
+        <li><a href="/new_book">Create New Book</a></li>
+        <li><a href="/book_list_sort">Sorted Book List</a></li>
+    </ul>
+</div>

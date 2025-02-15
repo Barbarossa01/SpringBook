@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Publisher List</title>
+    
+            <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+    
+</head>
+<body>
+
+    <!-- Include the menu fragment -->
+    <div th:replace="~{fragments/menu :: menu}"></div>  
+
+    <h2>List of Publishers</h2>
+
+    <a href="/SpringBooks/new_publisher">
+        <button type="button">Add New Publisher</button>
+    </a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Books Count</th>
+                <th>Actions</th> 
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="publisher : ${publishers}">
+                <td th:text="${publisher.idp}"></td>
+                <td th:text="${publisher.name}"></td>
+                <td th:text="${publisher.address}"></td>
+                <td th:text="${publisher.books != null ? publisher.books.size() : 0}"></td>
+                <td>
+                    <a th:href="@{/edit_publisher/{idp}(idp=${publisher.idp})}">Edit</a>
+                    <a th:href="@{/delete_publisher/{idp}(idp=${publisher.idp})}" onclick="return confirm('Are you sure you want to delete this publisher?');">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

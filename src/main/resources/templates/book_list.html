@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+</head>
+<body>
+
+    <div th:replace="~{fragments/menu :: menu}"></div> 
+
+<div>
+    <h2>Book List</h2>
+    <a href="/SpringBooks/new_book">
+        <button type="button">Create New Book</button>
+    </a>
+    <br/><br/>
+    <a href="/SpringBooks/book_list_sort">
+        <button type="button">View Sorted Book List</button>
+    </a>
+    <br/><br/>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Book Id</th>
+                <th>Title</th>
+                <th>Publisher</th>
+                <th>Category</th>
+                <th>Actions</th> <!-- Added column for Actions -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="book : ${lb}">
+                <td th:text="${book.idb}">Book ID</td>
+                <td th:text="${book.title}">Title</td>
+                <td th:text="${book.publisher.name}">Publisher</td>
+                <td th:text="${book.category.description}">Category</td>
+                <td>
+                    <!-- Edit Button -->
+                    <a th:href="@{/edit_book/{idb}(idb=${book.idb})}">Edit</a>
+                    <!-- Delete Button -->
+                    <form th:action="@{/delete_book/{idb}(idb=${book.idb})}" method="post" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

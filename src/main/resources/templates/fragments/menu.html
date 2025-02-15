@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Fragment</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+</head>
+<body>
+
+  <!-- Fragment declaration -->
+  <div th:fragment="menu">
+      <ul class="menu">
+      
+          <!-- Login link when user is not authenticated -->
+          <li><a sec:authorize="!isAuthenticated()" th:href="@{/login}">Login</a></li>
+
+          <!-- Logout form when user is authenticated -->
+          <li>
+              <form sec:authorize="isAuthenticated()" action="/SpringBooks/logout" method="GET">
+                  <button type="submit">Logout</button>
+              </form>
+          </li>
+          
+          <li><a href="/SpringBooks/book_list">Book List</a></li>          
+          <li><a href="/SpringBooks/publisher_list">Publisher List</a></li>
+          <li><a href="/SpringBooks/category_list">Category List</a></li>
+      </ul>
+  </div>
+
+</body>
+</html>

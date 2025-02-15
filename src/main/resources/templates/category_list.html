@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Category List</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+
+</head>
+<body>
+
+
+    <div th:replace="~{fragments/menu :: menu}"></div>  
+
+
+<h2>List of Categories</h2>
+
+    <a href="/SpringBooks/new_category">
+    <button type="button">Add New Category</button></a>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="category : ${categories}">
+            <td th:text="${category.idc}"></td>
+            <td th:text="${category.name}"></td>
+            <td th:text="${category.description}"></td>
+            <td>
+                <!-- Edit Link -->
+                <a th:href="@{/edit_category/{id}(id=${category.idc})}">Edit</a> |
+                
+                <!-- Delete Link -->
+                <a th:href="@{/delete_category/{id}(id=${category.idc})}" th:onclick="return confirm('Are you sure you want to delete this category?')">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

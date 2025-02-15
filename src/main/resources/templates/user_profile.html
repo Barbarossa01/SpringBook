@@ -1,0 +1,19 @@
+<!-- src/main/resources/templates/user_profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <div>
+        <p>Username: <span th:text="${user.username}"></span></p>
+        <p>Roles: <span th:text="${user.roles}"></span></p>
+    </div>
+    <div>
+        <a href="/edit_user">Edit Profile</a>
+    </div>
+</body>
+</html>
